@@ -4,7 +4,7 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 const app = express();
 
@@ -13,6 +13,10 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 app.use(cors());
 app.use(express.json());
 app.use("/", router);
+
+app.get("/coucou", (req, res) => {
+  res.status(200).send('hibou');
+})
 
 app.post("/", (req, res) => {
   const { name, email, message } = req.body;
