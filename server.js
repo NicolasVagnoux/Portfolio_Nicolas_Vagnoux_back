@@ -49,11 +49,12 @@ app.post("/", (req, res) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
+      res.sendStatus(500);
     } else {
       console.log("Email sent: " + info.response);
+      res.sendStatus(200);
     }
   });
-  res.status(200).send();
 });
 
 app.listen(port, () => {
