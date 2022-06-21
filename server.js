@@ -10,8 +10,16 @@ const app = express();
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-app.use(cors());
 app.use(express.json());
+
+const corsOptions = {
+  // origin: process.env.CORS_ORIGIN,
+  credentials: true, // access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+  maxAge: 3600,
+};
+app.use(cors(corsOptions));
+
 app.use("/", router);
 
 app.get("/coucou", (req, res) => {
